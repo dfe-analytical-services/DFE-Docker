@@ -6,22 +6,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update the package list and install dependencies
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    sudo \
-    gdal-bin \
-    libgdal-dev \
-    proj-bin \
-    libproj-dev \
-    libudunits2-dev \
-    yq \
-    wget \
-    apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:cran/libgit2 && \
-    apt-get install -y \
-    r-base \
-    curl \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev
+        sudo \
+        gdal-bin \
+        libgdal-dev \
+        proj-bin \
+        libproj-dev \
+        libudunits2-dev \
+        yq \
+        wget \
+        software-properties-common && \
+        add-apt-repository -y ppa:cran/libgit2 && \
+        apt-get update -y && \
+        apt-get install -y --no-install-recommends \
+        curl \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev
+
 
 # Install renv for R
 RUN R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv', repos='https://cloud.r-project.org')"
