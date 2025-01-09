@@ -1,38 +1,41 @@
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 # Set environment variables to ensure non-interactive installations
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update the package list and install dependencies
+# 1. Update and install fundamental packages
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
+        software-properties-common \
         sudo \
         gdal-bin \
         libgdal-dev \
         proj-bin \
         libproj-dev \
         libudunits2-dev \
-        yq \
         wget \
-        software-properties-common && \
-        add-apt-repository -y ppa:cran/libgit2 && \
-        apt-get update -y && \
-        apt-get install -y --no-install-recommends \
+        ca-certificates
+
+# 2. Enable the Universe repository (needed for yq), then install yq
+RUN add-apt-repository -y universe && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends yq
+
+# 3. Add the libgit2 PPA for newer libgit2, then install dependencies
+RUN add-apt-repository -y ppa:cran/libgit2 && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends \
         curl \
         libcurl4-openssl-dev \
         libssl-dev \
         libxml2-dev
 
+# 4. Clean up package caches
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install renv for R
-RUN R -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv', repos='https://cloud.r-project.org')"
-
-# Clean up unnecessary files
-RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
-
-# Create a user for GitHub Actions
+# 5. Create a user for GitHub Actions
 RUN useradd -m github-actions
 USER github-actions
 
-# Add an entrypoint (optional, if required)
+# 6. Set an entrypoint
 ENTRYPOINT ["/bin/bash"]
