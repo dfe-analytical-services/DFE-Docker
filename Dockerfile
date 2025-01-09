@@ -1,6 +1,5 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
-# Set environment variables to ensure non-interactive installations
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 1. Update and install fundamental packages
@@ -16,26 +15,21 @@ RUN apt-get update -y && \
         wget \
         ca-certificates
 
-# 2. Enable the Universe repository (needed for yq), then install yq
+# 2. Enable the Universe repository (needed for yq and other packages),
 RUN add-apt-repository -y universe && \
     apt-get update -y && \
-    apt-get install -y --no-install-recommends yq
-
-# 3. Add the libgit2 PPA for newer libgit2, then install dependencies
-RUN add-apt-repository -y ppa:cran/libgit2 && \
-    apt-get update -y && \
     apt-get install -y --no-install-recommends \
+        yq \
         curl \
         libcurl4-openssl-dev \
         libssl-dev \
         libxml2-dev
 
-# 4. Clean up package caches
+# 3. Clean up package caches
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 5. Create a user for GitHub Actions
+# 4. Create a non-root user for github actions
 RUN useradd -m github-actions
 USER github-actions
 
-# 6. Set an entrypoint
 ENTRYPOINT ["/bin/bash"]
