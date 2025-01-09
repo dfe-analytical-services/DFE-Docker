@@ -25,12 +25,23 @@ jobs:
         with:
           use-public-rspm: true
 
+      # Start a container from the image
+      - name: Run container
+        run: |
+          docker run -d --name temp-container ghcr.io/dfe-analytical-services/dfe-r-base:latest
+
       # Commit the changes to the Docker image
       - name: Commit Docker image changes
         run: |
-          docker commit $(docker ps -l -q) ghcr.io/dfe-analytical-services/dfe-r-base:latest
+          docker commit temp-container ghcr.io/dfe-analytical-services/dfe-r-base:latest
 
       # Push Docker image to DockerHub
       - name: Push Docker image to DockerHub
         run: |
           docker push ghcr.io/dfe-analytical-services/dfe-r-base:latest
+
+      # Clean up by stopping and removing the container
+      - name: Clean up container
+        run: |
+          docker stop temp-container
+          docker rm temp-container
