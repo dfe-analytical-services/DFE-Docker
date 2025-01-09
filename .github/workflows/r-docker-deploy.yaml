@@ -17,7 +17,7 @@ jobs:
       # Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/dfe-analytical-services/dfe-r-base:latest .
+          docker build -t ghcr.io/dfe-analytical-services/dfe-r-base2:latest .
 
       # Run R setup action inside Docker container
       - name: Run R setup action
@@ -28,17 +28,17 @@ jobs:
       # Start a container from the image
       - name: Run container
         run: |
-          docker run -d --name temp-container ghcr.io/dfe-analytical-services/dfe-r-base:latest
+          docker run -d --name temp-container ghcr.io/dfe-analytical-services/dfe-r-base2:latest
 
       # Commit the changes to the Docker image
       - name: Commit Docker image changes
         run: |
-          docker commit temp-container ghcr.io/dfe-analytical-services/dfe-r-base:latest
+          docker commit temp-container ghcr.io/dfe-analytical-services/dfe-r-base2:latest
 
       # Push Docker image to DockerHub
       - name: Push Docker image to DockerHub
         run: |
-          docker push ghcr.io/dfe-analytical-services/dfe-r-base:latest
+          docker push ghcr.io/dfe-analytical-services/dfe-r-base2:latest
 
       # Clean up by stopping and removing the container
       - name: Clean up container
