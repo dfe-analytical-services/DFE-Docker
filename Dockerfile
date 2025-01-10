@@ -13,7 +13,10 @@ RUN apt-get update -y && \
         libproj-dev \
         libudunits2-dev \
         wget \
-        ca-certificates
+        ca-certificates \
+        libfontconfig1-dev \
+        libfreetype6-dev \
+        pkg-config
 
 # 2. Enable the Universe repository (needed for yq and other packages),
 RUN add-apt-repository -y universe && \
@@ -31,9 +34,5 @@ RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> /usr/loca
 
 # 4. Clean up package caches
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# 5. Create a non-root user for GitHub Actions
-RUN useradd -m github-actions
-USER github-actions
 
 ENTRYPOINT ["/bin/bash"]
