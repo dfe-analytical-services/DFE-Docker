@@ -25,10 +25,14 @@ RUN add-apt-repository -y universe && \
         libssl-dev \
         libxml2-dev
 
-# 3. Clean up package caches
+# 3. Configure R to use CRAN binaries
+RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> /usr/local/lib/R/etc/Rprofile.site && \
+    echo 'options(pkgType = "binary")' >> /usr/local/lib/R/etc/Rprofile.site
+
+# 4. Clean up package caches
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 4. Create a non-root user for github actions
+# 5. Create a non-root user for GitHub Actions
 RUN useradd -m github-actions
 USER github-actions
 
