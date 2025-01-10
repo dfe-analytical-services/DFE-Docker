@@ -1,6 +1,7 @@
 FROM rocker/r-ver:4.4.2
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV RENV_PACKAGE_TYPE=binary
 
 # 1. Update and install fundamental packages
 RUN apt-get update -y && \
@@ -29,10 +30,13 @@ RUN add-apt-repository -y universe && \
         libxml2-dev
 
 # 3. Configure R to use CRAN binaries
-RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> /usr/local/lib/R/etc/Rprofile.site && \
-    echo 'options(pkgType = "binary")' >> /usr/local/lib/R/etc/Rprofile.site
+RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> /usr/local/lib/R/etc/Rprofile.site 
 
-# 4. Clean up package caches
+# 4. Install renv globally
+RUN R -e "install.packages('renv', repos = 'https://cloud.r-project.org')"
+
+# 5. Clean up package caches
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 ENTRYPOINT ["/bin/bash"]
