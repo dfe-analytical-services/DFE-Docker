@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     yq \
     curl \
     libcurl4-openssl-dev \
+    libgit2-dev \
     libssl-dev \
     libxml2-dev && \
     apt-get clean && \
