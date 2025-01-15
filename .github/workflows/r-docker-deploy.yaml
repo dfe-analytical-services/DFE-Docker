@@ -27,4 +27,4 @@ jobs:
       # Push Docker image to GitHub Container Registry
       - name: Push Docker image to GitHub Container Registry
         run: |
-          docker push ghcr.io/dfe-analytical-services/dfe-r-base2:latest
+          docker push ghcr.io/dfe-analytical-services/dfe-r-base:latest
