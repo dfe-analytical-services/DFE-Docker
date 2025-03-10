@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium-browser \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
-    libXcomposite-dev \
+    libXcomposite1 \
     libfribidi-dev \
     libgraphite2-dev \
     libharfbuzz-dev \
