@@ -18,7 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
+    chromium-browser \
     libatk1.0-0 \
+    libatk-bridge2.0-0 \
     libfribidi-dev \
     libgraphite2-dev \
     libharfbuzz-dev \
