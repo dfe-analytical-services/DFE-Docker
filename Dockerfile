@@ -2,7 +2,11 @@ FROM ubuntu:latest
 
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
+    gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub && \
+    echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
     sudo \
     gdal-bin \
     libgdal-dev \
@@ -19,10 +23,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
     chromium-browser \
+    google-chrome-stable \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libxcomposite-dev \
     libxdamage1 \
+    libxrandr2 \
     libfribidi-dev \
     libgraphite2-dev \
     libharfbuzz-dev \
