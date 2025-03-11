@@ -2,10 +2,7 @@ FROM ubuntu:latest
 
 
 # Install system dependencies
-RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
-    gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub && \
-    echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     sudo \
     gdal-bin \
@@ -23,7 +20,6 @@ RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pu
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
     chromium-browser \
-    google-chrome-stable \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libxcomposite-dev \
@@ -40,5 +36,12 @@ RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pu
     libxml2-dev \
     glpk-utils \
     libglpk-dev && \
+    wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
+    gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub && \
+    echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install \
+    sudo \
+    google-chrome-stable && \    
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
