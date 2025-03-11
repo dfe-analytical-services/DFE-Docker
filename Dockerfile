@@ -11,6 +11,7 @@ RUN apt-get update && \
     libproj-dev \
     libudunits2-dev \
     wget \
+    gnupg2 \
     ca-certificates \
     libfontconfig1-dev \
     libfreetype6-dev \
