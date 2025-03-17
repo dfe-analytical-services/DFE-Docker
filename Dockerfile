@@ -43,9 +43,7 @@ RUN apt-get update && \
 
 # I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
 # the wrong locale being set, so setting to GB here.
-RUN localectl
-RUN localectl set-locale LANG=en_GB.UTF-8
-RUN localectl
+update-locale LANG=de_GB.UTF-8
 
 # Install chrome so that shinytest2 can run
 RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
