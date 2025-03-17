@@ -1,11 +1,23 @@
 FROM ubuntu:latest
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    sudo \
+    locales && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
+# the wrong locale being set, so setting to GB here.
+RUN sed -i '/en_GB.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_GB.UTF-8  
+ENV LANGUAGE en_GB:en  
+ENV LC_ALL en_GB.UTF-8
 
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    sudo \
-    locales \
     gdal-bin \
     libgdal-dev \
     proj-bin \
@@ -41,14 +53,6 @@ RUN apt-get update && \
     libglpk-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
-# the wrong locale being set, so setting to GB here.
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
-    locale-gen
-ENV LANG en_GB.UTF-8  
-ENV LANGUAGE en_GB:en  
-ENV LC_ALL en_GB.UTF-8
 
 # Install chrome so that shinytest2 can run
 RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
