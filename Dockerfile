@@ -41,6 +41,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
+# the wrong locale being set, so setting to GB here.
+RUN localectl
+RUN localectl set-locale LANG=en_GB.UTF-8
+RUN localectl
+
 # Install chrome so that shinytest2 can run
 RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
     gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub && \
