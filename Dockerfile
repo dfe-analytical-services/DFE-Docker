@@ -38,7 +38,6 @@ RUN apt-get update && \
     curl \
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
-    chromium-browser \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libxcomposite-dev \
