@@ -15,6 +15,10 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:en  
 ENV LC_ALL en_GB.UTF-8
 
+RUN pwd
+
+RUN ls
+
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
