@@ -57,3 +57,9 @@ RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pu
     google-chrome-stable && \    
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+    # Install chrome so that shinytest2 can run
+RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/' | sudo tee /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y r-base && \
+    apt-get clean 
