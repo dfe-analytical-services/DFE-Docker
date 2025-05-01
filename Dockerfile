@@ -1,27 +1,10 @@
-FROM r-base:4.4.2
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    sudo \
-    locales && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
-# the wrong locale being set, so setting to GB here.
-RUN sed -i '/en_GB.UTF-8/s/^# //g' /etc/locale.gen && \
-    locale-gen
-ENV LANG en_GB.UTF-8  
-ENV LANGUAGE en_GB:en  
-ENV LC_ALL en_GB.UTF-8
-
-RUN pwd
-
-RUN ls
+FROM ubuntu:latest
 
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    sudo \
+    locales \
     gdal-bin \
     libgdal-dev \
     proj-bin \
@@ -57,12 +40,20 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Posit Air for code styling
-RUN curl -LsSf https://github.com/posit-dev/air/releases/latest/download/air-installer.sh | sh
+# I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
+# the wrong locale being set, so setting to GB here.
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_GB.UTF-8  
+ENV LANGUAGE en_GB:en  
+ENV LC_ALL en_GB.UTF-8
 
-# Add latest R packages to renv cache
-COPY r-setup r-setup
-
-WORKDIR /r-setup
-CMD Rscript R/update-packages.R
-WORKDIR /
+# Install chrome so that shinytest2 can run
+RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub && \
+    gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub && \
+    echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    google-chrome-stable && \    
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
