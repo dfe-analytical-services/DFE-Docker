@@ -72,6 +72,8 @@ RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pu
 RUN curl -LsSf https://github.com/posit-dev/air/releases/latest/download/air-installer.sh | sh
 
 # Add latest R packages to renv cache
+RUN apt-get install -y r-base
+
 COPY r-setup r-setup
 
 RUN cd r-setup && \
