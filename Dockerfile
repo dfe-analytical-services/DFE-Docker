@@ -64,4 +64,5 @@ RUN curl -LsSf https://github.com/posit-dev/air/releases/latest/download/air-ins
 COPY r-setup r-setup
 
 WORKDIR /r-setup
-CMD ["Rscript", "Rscript R/update-packages.R"]
+CMD ["Rscript", "R/update-packages.R"]
+WORKDIR /
