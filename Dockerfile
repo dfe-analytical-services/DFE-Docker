@@ -66,3 +66,8 @@ RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pu
 
 # Install Posit Air for code styling
 RUN curl -LsSf https://github.com/posit-dev/air/releases/latest/download/air-installer.sh | sh
+
+# Add latest R packages to renv cache
+RUN cd r-setup && \
+    Rscript R/update-packages.R \
+    cd ..
