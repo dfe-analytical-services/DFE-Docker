@@ -30,3 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libglpk-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Add latest R packages to renv cache
+RUN cd r-setup && \
+    Rscript R/update-packages.R \
+    cd ..
