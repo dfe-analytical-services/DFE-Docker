@@ -36,6 +36,7 @@ RUN apt-get update && \
     libtiff5-dev \
     libxml2-dev \
     glpk-utils \
+    libcairo2-dev \
     libglpk-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
