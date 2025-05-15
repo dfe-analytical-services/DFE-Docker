@@ -37,7 +37,8 @@ RUN apt-get update && \
     libxml2-dev \
     glpk-utils \
     libcairo2-dev \
-    libglpk-dev && \
+    libglpk-dev \
+    libabsl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
