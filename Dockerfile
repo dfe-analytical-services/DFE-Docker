@@ -12,6 +12,7 @@ RUN apt-get update && \
     libudunits2-dev \
     wget \
     curl \
+    git \
     gnupg2 \
     ca-certificates \
     libfontconfig1-dev \
