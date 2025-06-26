@@ -20,6 +20,7 @@ RUN apt-get update && \
     pkg-config \
     yq \
     curl \
+    language-pack-en-base \
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
     libatk1.0-0 \
