@@ -1,6 +1,8 @@
 name: Build R Docker Image
 
 on:
+  schedule:
+    - cron: '0 2 * * Mon' # 2am every Monday
   push:
     branches:
       - main
