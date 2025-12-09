@@ -29,6 +29,7 @@ RUN apt-get update && \
     libxcomposite-dev \
     libxdamage1 \
     libxrandr2 \
+    libfontconfig1-dev \
     libfribidi-dev \
     libgraphite2-dev \
     libharfbuzz-dev \
