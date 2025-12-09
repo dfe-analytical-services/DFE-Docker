@@ -11,6 +11,8 @@ RUN apt-get update && \
     libproj-dev \
     libudunits2-dev \
     wget \
+    chromium \
+    cmake \
     curl \
     git \
     gnupg2 \
@@ -19,7 +21,6 @@ RUN apt-get update && \
     libfreetype6-dev \
     pkg-config \
     yq \
-    curl \
     language-pack-en-base \
     libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
@@ -40,7 +41,8 @@ RUN apt-get update && \
     glpk-utils \
     libcairo2-dev \
     libglpk-dev \
-    libabsl-dev && \
+    libabsl-dev \
+    pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
