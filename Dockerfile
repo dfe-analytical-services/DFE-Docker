@@ -44,6 +44,11 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Some packages required by s2 as flagged in LSIP dashboard fail
+apt-get install libabsl-dev
+dnf install abseil-cpp-devel
+brew install abseil
+
 # I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
 # the wrong locale being set, so setting to GB here.
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
