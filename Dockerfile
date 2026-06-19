@@ -56,20 +56,3 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:en  
 ENV LC_ALL en_GB.UTF-8
 
-# Install chrome so that shinytest2 can run
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    fonts-liberation \
-    libasound2 \
-    libcups2 \
-    libgbm1 \
-    libgtk-4-1 \
-    libpango-1.0-0 \
-    libvulkan1 \
-    libxkbcommon0 \
-    xdg-utils && \
-    apt-get clean
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt install ./google-chrome-stable_current_amd64.deb && \
-    apt-get clean
-    
