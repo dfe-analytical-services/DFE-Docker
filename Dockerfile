@@ -43,6 +43,7 @@ RUN apt-get update && \
     libcairo2-dev \
     libglpk-dev \
     libabsl-dev \
+    libuv1-dev \
     pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
