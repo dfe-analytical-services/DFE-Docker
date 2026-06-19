@@ -56,6 +56,9 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:en  
 ENV LC_ALL en_GB.UTF-8
 
+RUN apt install -y libssl-dev libxml2-dev libcurl4-openssl-dev
+RUN apt install -y r-base
+
 RUN R -e "install.packages(c('renv'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "renv::init()"
 RUN R -e "renv::install(c('chromote', 'tidyverse', 'rsconnect', 'dfe-analyitcal-services/dfeshiny', 'dfe-analyitcal-services/shinyGovstyle'))"
