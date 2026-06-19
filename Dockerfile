@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM rocker/r-ver:4
 
 # Install system dependencies
 RUN apt-get update && \
@@ -55,9 +55,6 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
 ENV LANG en_GB.UTF-8  
 ENV LANGUAGE en_GB:en  
 ENV LC_ALL en_GB.UTF-8
-
-RUN apt install -y libssl-dev libxml2-dev libcurl4-openssl-dev
-RUN apt install -y r-base
 
 RUN R -e "install.packages(c('renv'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "renv::init()"
