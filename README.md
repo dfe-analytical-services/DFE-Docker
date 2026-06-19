@@ -38,6 +38,7 @@ If you need to add or update the dependencies included in the Docker image:
 2. For major changes, consider versioning the Docker image explicitly. Update the workflow to tag images with a version, e.g. `ghcr.io/dfe-analytical-services/dfe-r-base:1.0.0`.
 3. Update any repositories using this image to reference the correct versioned tag to prevent breaking changes.
 
+
 ## Deployment
 
 The Docker image is deployed to the [GitHub Container Registry](https://github.com.mcas.ms/orgs/dfe-analytical-services/packages):
