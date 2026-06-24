@@ -57,3 +57,5 @@ ENV LANGUAGE en_GB:en
 ENV LC_ALL en_GB.UTF-8
 
 RUN R -e "install.packages(c('renv'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "source('r-renv-packages.R')"
+
