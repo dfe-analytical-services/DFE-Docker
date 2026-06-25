@@ -1,5 +1,4 @@
 # Package set up
-renv::init()
 renv::record(
   c(
     "renv",
@@ -8,11 +7,13 @@ renv::record(
     "dfe-analytical-services/eesyapi",
     "dfe-analytical-services/eesyscreener",
     "dfe-analytical-services/shinyGovstyle",
+    "ggplot2",
+    "ggiraph",
+    "sf",
     "shiny",
     "shinytest2",
-    "terra",
-    "sf"
+    "systemfonts",
+    "terra"
   )
 )
 renv::restore()
-renv::snapshot()

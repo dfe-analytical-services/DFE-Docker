@@ -57,4 +57,23 @@ ENV LANGUAGE en_GB:en
 ENV LC_ALL en_GB.UTF-8
 
 RUN R -e "install.packages(c('renv'),dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "renv::init(); renv::record(c('renv','dfe-analytical-services/dfeshiny','dfe-analytical-services/dfeR','dfe-analytical-services/eesyapi','dfe-analytical-services/eesyscreener','dfe-analytical-services/shinyGovstyle','shiny','shinytest2','terra','sf')); renv::restore(); renv::snapshot()"
+
+# From https://rstudio.github.io/renv/articles/docker.html
+RUN mkdir -p renv
+
+# copy renv infrastructure
+COPY renv.lock renv.lock
+COPY .Rprofile .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.json renv/settings.json
+
+# set path to the renv package cache
+ENV RENV_PATHS_CACHE=/renv/cache
+
+# ensure packages are copied, not symlinked
+ENV RENV_CONFIG_CACHE_SYMLINKS=FALSE
+
+# restore with mounted cache
+RUN --mount=type=cache,target=/renv/cache \
+    R -s -e "renv::restore()"
+    
