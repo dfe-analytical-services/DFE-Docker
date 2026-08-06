@@ -49,7 +49,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install chrome headless browser dependencies
-RUN sudo apt-get install -y --no-install-recommends \ 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \ 
     libasound2 \
     libnspr4 \
     libnss3 \
