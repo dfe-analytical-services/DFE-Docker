@@ -51,7 +51,7 @@ RUN apt-get update && \
 # Install chrome headless browser dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \ 
-    libasound2 \
+    liboss4-salsa-asound2 \
     libnspr4 \
     libnss3 \
     libxss1 \
