@@ -4,46 +4,45 @@ FROM rocker/r-ver:4
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     sudo \
+    wget \
     locales \
     gdal-bin \
     libgdal-dev \
     proj-bin \
     libproj-dev \
     libudunits2-dev \
-    wget \
+    ca-certificates \
     chromium \
     cmake \
     curl \
-    git \
-    gnupg2 \
-    ca-certificates \
-    libfontconfig1-dev \
-    libfreetype6-dev \
-    pkg-config \
-    yq \
-    language-pack-en-base \
-    libcurl4-openssl-dev \
     gir1.2-harfbuzz-0.0 \
+    git \
+    glpk-utils \
+    gnupg2 \
+    language-pack-en-base \
+    libabsl-dev \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
-    libxcomposite-dev \
-    libxdamage1 \
-    libxrandr2 \
+    libcairo2-dev \
+    libcurl4-openssl-dev \
     libfontconfig1-dev \
+    libfreetype6-dev \
     libfribidi-dev \
+    libgit2-dev \
     libgraphite2-dev \
+    libglpk-dev \
     libharfbuzz-dev \
     libharfbuzz-gobject0 \
     libharfbuzz-icu0 \
-    libgit2-dev \
     libssl-dev \
     libtiff5-dev \
-    libxml2-dev \
-    glpk-utils \
-    libcairo2-dev \
-    libglpk-dev \
-    libabsl-dev \
     libuv1-dev \
+    libxcomposite-dev \
+    libxdamage1 \
+    libxml2-dev \
+    libxrandr2 \
+    pkg-config \
+    yq \
     pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -54,8 +53,8 @@ RUN apt-get update && \
     liboss4-salsa-asound2 \
     libnspr4 \
     libnss3 \
-    libxss1 \
     libxkbcommon-x11-0 \
+    libxss1 \
     xdg-utils \
     unzip \
     fonts-liberation \
