@@ -45,6 +45,7 @@ RUN apt-get update && \
     libglpk-dev \
     libabsl-dev \
     libuv1-dev \
+    libxkbcommon-x11-0 \
     pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
