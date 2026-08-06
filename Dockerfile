@@ -58,7 +58,6 @@ RUN apt-get update && \
     libxkbcommon-x11-0 \
     xdg-utils \
     unzip \
-    libappindicator1 \
     fonts-liberation \
     chromium-browser && \
     apt-get clean && \
