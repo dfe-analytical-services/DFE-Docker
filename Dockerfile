@@ -12,6 +12,7 @@ RUN apt-get update && \
     libudunits2-dev \
     wget \
     chromium \
+    chromium-browser \
     cmake \
     curl \
     git \
@@ -47,8 +48,6 @@ RUN apt-get update && \
     pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-RUN snap install chromium
 
 # I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
 # the wrong locale being set, so setting to GB here.
