@@ -48,6 +48,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN snap install chromium
+
 # I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
 # the wrong locale being set, so setting to GB here.
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
