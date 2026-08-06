@@ -12,7 +12,6 @@ RUN apt-get update && \
     libudunits2-dev \
     wget \
     chromium \
-    chromium-browser \
     cmake \
     curl \
     git \
@@ -45,11 +44,25 @@ RUN apt-get update && \
     libglpk-dev \
     libabsl-dev \
     libuv1-dev \
-    libxkbcommon-x11-0 \
     pandoc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install chrome headless browser dependencies
+RUN sudo apt-get install -y --no-install-recommends \ 
+    libasound2 \
+    libnspr4 \
+    libnss3 \
+    libxss1 \
+    libxkbcommon-x11-0 \
+    xdg-utils \
+    unzip \
+    libappindicator1 \
+    fonts-liberation \
+    chromium-browser && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 # I was getting some issues with pound symbols in shinytest on GH Actions, suspect this is down to 
 # the wrong locale being set, so setting to GB here.
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
