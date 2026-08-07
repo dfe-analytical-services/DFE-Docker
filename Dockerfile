@@ -50,9 +50,10 @@ RUN apt-get update && \
 # Install chrome headless browser dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \ 
-    liboss4-salsa-asound2 \
+    libasound2t64 \
     libnspr4 \
     libnss3 \
+    liboss4-salsa-asound2 \
     libxkbcommon-x11-0 \
     libxss1 \
     xdg-utils \
